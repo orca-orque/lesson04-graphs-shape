@@ -145,9 +145,39 @@ with st.container(border=True):
 st.divider()
 
 # ------------------------------------------------------------
-# 구역 5. (다음 그래프를 위한 자리)
+# 구역 5. 장르별 총 관객 분포 (상자 그림)
 # ------------------------------------------------------------
-st.header("5. ")
+st.header("5. 장르별 총 관객 분포")
+
+genre_movie_counts = df["genre"].value_counts()
+major_genres = genre_movie_counts[genre_movie_counts >= 10].index
+df_major = df[df["genre"].isin(major_genres)]
+
+fig_box = px.box(
+    df_major,
+    x="genre",
+    y="total_audi",
+    hover_name="movieNm",
+)
+fig_box.update_traces(
+    hovertemplate="<b>%{hovertext}</b><br>총 관객: %{y:,}명<extra></extra>"
+)
+fig_box.update_layout(
+    xaxis_title="장르 (영화 10편 이상)",
+    yaxis_title="총 관객수",
+)
+
+st.plotly_chart(fig_box, use_container_width=True)
+
+with st.container(border=True):
+    st.markdown("**이 그래프로 알 수 있는 것:** ")
+
+st.divider()
+
+# ------------------------------------------------------------
+# 구역 6. (다음 그래프를 위한 자리)
+# ------------------------------------------------------------
+st.header("6. ")
 
 st.info("다음 그래프가 이 구역에 추가될 예정입니다.")
 
