@@ -228,9 +228,37 @@ with st.container(border=True):
 st.divider()
 
 # ------------------------------------------------------------
-# 구역 8. (다음 그래프를 위한 자리)
+# 구역 8. 질문: 10위권에 오래 머문 영화는 개봉일 상영횟수도 많은가
 # ------------------------------------------------------------
-st.header("8. ")
+st.header("8. 10위권에 오래 머문 영화는 개봉일 상영횟수도 많은가")
+
+fig_days_show = px.scatter(
+    df,
+    x="days_in_top10",
+    y="first_show",
+    hover_name="movieNm",
+    title="10위권에 오래 머문 영화는 개봉일 상영횟수도 많은가",
+)
+fig_days_show.update_traces(
+    marker=dict(size=10),
+    hovertemplate="<b>%{hovertext}</b><br>10위권 유지 일수: %{x}일<br>개봉일 상영횟수: %{y:,}회<extra></extra>",
+)
+fig_days_show.update_layout(
+    xaxis_title="10위권에 머문 날수",
+    yaxis_title="개봉일 상영횟수",
+)
+
+st.plotly_chart(fig_days_show, use_container_width=True)
+
+with st.container(border=True):
+    st.markdown("**이 그래프로 알 수 있는 것:** ")
+
+st.divider()
+
+# ------------------------------------------------------------
+# 구역 9. (다음 그래프를 위한 자리)
+# ------------------------------------------------------------
+st.header("9. ")
 
 st.info("다음 그래프가 이 구역에 추가될 예정입니다.")
 
