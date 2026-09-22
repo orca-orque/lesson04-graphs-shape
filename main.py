@@ -54,9 +54,31 @@ with st.container(border=True):
 st.divider()
 
 # ------------------------------------------------------------
-# 구역 2. (다음 그래프를 위한 자리)
+# 구역 2. 장르 안의 영화별 총 관객 (트리맵)
 # ------------------------------------------------------------
-st.header("2. ")
+st.header("2. 장르 안의 영화별 총 관객")
+
+fig_treemap = px.treemap(
+    df,
+    path=[px.Constant("전체"), "genre", "movieNm"],
+    values="total_audi",
+)
+fig_treemap.update_traces(
+    hovertemplate="<b>%{label}</b><br>총 관객: %{value:,}명<extra></extra>"
+)
+fig_treemap.update_layout(margin=dict(t=30, l=10, r=10, b=10))
+
+st.plotly_chart(fig_treemap, use_container_width=True)
+
+with st.container(border=True):
+    st.markdown("**이 그래프로 알 수 있는 것:** ")
+
+st.divider()
+
+# ------------------------------------------------------------
+# 구역 3. (다음 그래프를 위한 자리)
+# ------------------------------------------------------------
+st.header("3. ")
 
 st.info("다음 그래프가 이 구역에 추가될 예정입니다.")
 
