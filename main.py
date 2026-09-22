@@ -117,9 +117,37 @@ with st.container(border=True):
 st.divider()
 
 # ------------------------------------------------------------
-# 구역 4. (다음 그래프를 위한 자리)
+# 구역 4. 개봉일 스크린수와 총 관객의 관계 (산점도)
 # ------------------------------------------------------------
-st.header("4. ")
+st.header("4. 개봉일 스크린수와 총 관객의 관계")
+
+fig_scatter = px.scatter(
+    df,
+    x="first_scrn",
+    y="total_audi",
+    color="genre",
+    hover_name="movieNm",
+)
+fig_scatter.update_traces(
+    hovertemplate="<b>%{hovertext}</b><br>개봉일 스크린수: %{x:,}<br>총 관객: %{y:,}명<extra></extra>"
+)
+fig_scatter.update_layout(
+    xaxis_title="개봉일 스크린수",
+    yaxis_title="총 관객수",
+    legend_title_text="장르",
+)
+
+st.plotly_chart(fig_scatter, use_container_width=True)
+
+with st.container(border=True):
+    st.markdown("**이 그래프로 알 수 있는 것:** ")
+
+st.divider()
+
+# ------------------------------------------------------------
+# 구역 5. (다음 그래프를 위한 자리)
+# ------------------------------------------------------------
+st.header("5. ")
 
 st.info("다음 그래프가 이 구역에 추가될 예정입니다.")
 
