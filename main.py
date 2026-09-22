@@ -205,9 +205,32 @@ with st.container(border=True):
 st.divider()
 
 # ------------------------------------------------------------
-# 구역 7. (다음 그래프를 위한 자리)
+# 구역 7. 국가별 장르 구성 (선버스트)
 # ------------------------------------------------------------
-st.header("7. ")
+st.header("7. 국가별 장르 구성")
+
+nation_genre_counts = df.groupby(["nation", "genre"]).size().reset_index(name="count")
+
+fig_sunburst = px.sunburst(
+    nation_genre_counts,
+    path=["nation", "genre"],
+    values="count",
+)
+fig_sunburst.update_traces(
+    hovertemplate="%{label}<br>편수: %{value}편<extra></extra>"
+)
+
+st.plotly_chart(fig_sunburst, use_container_width=True)
+
+with st.container(border=True):
+    st.markdown("**이 그래프로 알 수 있는 것:** ")
+
+st.divider()
+
+# ------------------------------------------------------------
+# 구역 8. (다음 그래프를 위한 자리)
+# ------------------------------------------------------------
+st.header("8. ")
 
 st.info("다음 그래프가 이 구역에 추가될 예정입니다.")
 
